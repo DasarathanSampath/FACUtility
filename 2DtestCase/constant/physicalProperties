@@ -1,0 +1,69 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  10
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      physicalProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+Um                  Um [0 1 -1 0 0 0 0] 4.5; //m/s
+d                   d [0 1 0 0 0 0 0] 0.005; //m
+Dvalue
+{
+    type value;
+    value 3.21e-8;
+}
+theta               theta [0 0 0 0 0 0 0] 0.947;
+corrosionHours      corrosionHours [0 0 1 0 0 0 0] 10000;//10 thousand hours
+mA                  mA [0 0 0 0 0 0 0] -7.94e-6;//-1.82e-3;//-7.94e-6;//Molality of Cl- or negative molality of K+ from input solution
+
+thermoType
+{
+    type            heRhoThermo;
+    mixture         pureMixture;
+    transport       const;
+    thermo          hConst;
+    equationOfState perfectFluid;//TailEOS;
+    specie          specie;
+    energy          sensibleEnthalpy;
+}
+
+mixture
+{
+    specie
+    {
+        molWeight       18;//in mol/g
+    }
+    equationOfState
+    {
+        // rho0    1000;
+        // B       2.2e9;
+        // n       7;
+        // p0      1e5;
+        rho0             916.7;//@150° C in kg/m3
+        R                461.52;
+    }
+    thermodynamics
+    {
+        Cp              4181;
+        Hf              0;
+    }
+    transport
+    {
+        // mu              8.89e-4;//@25° C in kg/m-s
+        // kappa           0.606; //@25 °C in W/m-K
+        mu                 1.82e-4;//@150° C in kg/m-s
+        Pr                 6.62;
+    }
+}
+
+
+// ************************************************************************* //

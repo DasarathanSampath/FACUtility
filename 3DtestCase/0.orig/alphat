@@ -1,0 +1,71 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2212                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      alphat;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [1 -1 -1 0 0 0 0];
+
+internalField   uniform 0;
+
+boundaryField
+{
+    inlet
+    {
+        type            zeroGradient;
+    }
+
+    outlet
+    {
+        type            calculated;
+        value           $internalField;
+    }
+
+    upperWall
+    {
+        type            compressible::alphatJayatillekeWallFunction;
+        Prt             0.85;
+        value           $internalField;
+    }
+
+    "(upstream|downstream|obstructionTop|obstructionLeft|obstructionRight)"
+    {
+        type            compressible::alphatJayatillekeWallFunction;
+        Prt             0.85;
+        value           $internalField;
+    }
+
+    contractionWalls
+    {
+        type            compressible::alphatJayatillekeWallFunction;
+        Prt             0.85;
+        value           $internalField;
+    }
+
+    frontWall
+    {
+        type            compressible::alphatJayatillekeWallFunction;
+        Prt             0.85;
+        value           $internalField;
+    }
+
+    backWall
+    {
+        type            compressible::alphatJayatillekeWallFunction;
+        Prt             0.85;
+        value           $internalField;
+    }
+}
+
+
+// ************************************************************************* //

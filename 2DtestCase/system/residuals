@@ -1,0 +1,37 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     |
+    \\  /    A nd           | Web:      www.OpenFOAM.com
+     \\/     M anipulation  |
+-------------------------------------------------------------------------------
+Description
+    For specified fields, writes out the initial residuals for the first
+    solution of each time step; for non-scalar fields (e.g. vectors), writes
+    the largest of the residuals for each component (e.g. x, y, z).
+
+\*---------------------------------------------------------------------------*/
+
+/* #includeEtc "caseDicts/postProcessing/numerical/solverInfo.cfg"
+
+fields      (U p k epsilon h); */
+
+solverInfoFluid
+{
+    // Mandatory entries (unmodifiable)
+    type            solverInfo;
+    libs            (utilityFunctionObjects);
+
+    // Mandatory entries (runtime modifiable)
+    fields          (".*");
+
+    //region          fluid;
+    // Optional entries (runtime modifiable)
+    writeResidualFields false;
+
+    // Inherited entries
+}
+
+
+// ************************************************************************* //
+

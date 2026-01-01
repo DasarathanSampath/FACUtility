@@ -1,0 +1,78 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1812                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      volFlux;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+    //y++
+    yPlusFluid
+    {
+        type            yPlus;
+        libs            ("fieldFunctionObjects");
+        writeControl    writeTime;
+        writeFields     true;
+    }
+
+    yPlusStats
+    {
+        type            surfaceFieldValue;
+        libs            ("libfieldFunctionObjects");
+        writeControl    timeStep;
+        writeInterval   1;
+
+        regionType      faceZone;
+        name            downstream25mmZone;
+
+        operation       none;
+        fields          (yPlus);
+        writeControl    writeTime;
+        writeFields     true;
+        surfaceFormat   boundaryData;
+    }
+
+    //----------------------------------
+    //Volume flux    
+    //----------------------------------
+    
+        
+    inletVolFlux
+    {
+        type            surfaceFieldValue;
+        libs            ("libfieldFunctionObjects.so");
+        writeControl    timeStep;
+        writeInterval   1;
+        writeFields     false;
+        log             false;
+        //region          fluid;
+        regionType      patch;
+        name            inlet;
+        fields          (phi);
+        operation       sum;
+    }
+
+    outletVolFlux
+    {
+        type            surfaceFieldValue;
+        libs            ("libfieldFunctionObjects.so");
+        writeControl    timeStep;
+        writeInterval   1;
+        writeFields     false;
+        log             false;
+        //region          fluid;
+        regionType      patch;
+        name            outlet;
+        fields          (phi);
+        operation       sum;
+    }
+    
+// ************************************************************************* //

@@ -1,0 +1,13 @@
+FACUtility.C
+
+models/FACErosionModel.C
+models/FACChemistryModel.C
+models/FACChemistryConstants.C
+models/FACThinningModel.C
+
+utils/FACSelection.C
+utils/FACInterpolation.C
+utils/FACChemistryTable.C
+
+EXE = $(FOAM_USER_APPBIN)/FACUtility
+

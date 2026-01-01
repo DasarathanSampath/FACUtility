@@ -1,0 +1,23 @@
+# chemistryConstants.dat
+# Sweeton & Baes least-square constants for ln(Kb) form:
+# ln(Kb) = [ -Ab/T + Bb*(ln(T/K) - 1) + Db ] / R
+# T in Kelvin
+# R in cal/mol-K (default 1.987, can be overridden)
+# Molar mass of iron in g/mol
+# Density of iron in g/cm3
+# Columns:
+# species  Ab  Bb  Db
+# Units: Ab [cal/mol], Bb [cal/mol-K], Db [cal/mol-K]
+
+
+R_cal_per_molK      1.987
+Molor_mass_iron     55.845 
+Density_iron        7.874
+
+speciesConstants
+{
+-26876   9.81  -81.21    # Fe2+
+-11733   3.35  -42.72    # FeOH+
+4615   0.0  -23.57    # Fe(OH)2
+9045   0.0  -49.37   # Fe(OH)3-
+}
