@@ -4,7 +4,7 @@
 # T in Kelvin
 # R in cal/mol-K (default 1.987, can be overridden)
 # Molar mass of iron in g/mol
-# Density of iron in g/cm3
+# Density of iron in kg/m3
 # Columns:
 # species  Ab  Bb  Db
 # Units: Ab [cal/mol], Bb [cal/mol-K], Db [cal/mol-K]
@@ -12,7 +12,7 @@
 
 R_cal_per_molK      1.987
 Molor_mass_iron     55.845 
-Density_iron        7.874
+Density_iron        7874
 
 speciesConstants
 {

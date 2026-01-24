@@ -54,7 +54,7 @@ void FACThinningModel::compute
         const scalar Ceq = CeqFace.boundaryField()[pId][lf];
         
         //Find ferrous iron solubility Ceq in L/L
-        const scalar CeqLbyL = Ceq * (Molor_mass_iron/Density_iron * 1e-3) * rhoC * 1e-3;
+        const scalar CeqLbyL = Ceq * (Molor_mass_iron/Density_iron) * rhoC * 1e-3;
 
         TLFace.boundaryFieldRef()[pId][lf] = chromiumFactor_ * corrosionHours_ * km * CeqLbyL * 60*60*1000;
 
