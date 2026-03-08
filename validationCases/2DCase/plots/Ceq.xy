@@ -1,0 +1,21 @@
+#!/usr/bin/gnuplot    
+reset
+
+set term pngcairo dashed font "Times,40" size 1920,1080
+
+set style line 1 lt 1 lw 4 linecolor rgb "#000000"
+
+set output 'Ceq.png'
+
+set grid
+set xlabel "Distance (mm)" font "Times Bold,40"
+
+set ylabel "C_{eq} (mol/kg)" font "Times Bold,40"
+
+set key outside center top horizontal
+
+set title "Ferrous Ions Concentration (C_{eq})" font "Times Bold,50"
+
+set term pngcairo enhanced linewidth 2
+
+plot "postProcessing//FACUtility/2600/FAC_downstream.dat" every ::0::502 using (($1-0.253)*1000):6 title 'C_{eq}' w l ls 1, \

@@ -1,0 +1,19 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2112                                 |
+|   \\  /    A nd           | Website:                                        |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      surfaceFeatureExtractDict;
+}
+
+inlet                   {surfaces ("inlet.stl"); extractionMethod extractFromSurface; includedAngle 180; subsetFeatures {nonManifoldEdges no; openEdges yes;} writeObj yes;}
+outlet                  {surfaces ("outlet.stl"); extractionMethod extractFromSurface; includedAngle 180; subsetFeatures {nonManifoldEdges no; openEdges yes;} writeObj yes;}
+walls                   {surfaces ("walls.stl"); extractionMethod extractFromSurface; includedAngle 180; subsetFeatures {nonManifoldEdges no; openEdges yes;} writeObj yes;}
+elbow                   {surfaces ("elbow.stl"); extractionMethod extractFromSurface; includedAngle 180; subsetFeatures {nonManifoldEdges no; openEdges yes;} writeObj yes;}

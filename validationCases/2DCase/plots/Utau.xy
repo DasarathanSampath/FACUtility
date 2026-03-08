@@ -1,0 +1,32 @@
+#!/usr/bin/gnuplot    
+reset
+
+set term pngcairo dashed font "Times,40" size 1920,1080
+
+set style line 1 lt 1 lw 4 linecolor rgb "#000000"
+set style line 2 lt 1 lw 4 linecolor rgb "#00008B"
+
+set output 'Utau.png'
+
+set grid
+set xlabel "Distance (mm)" font "Times Bold,40"
+
+set ylabel "U_{τ} (m/s)" font "Times Bold,40"
+
+set key outside center top horizontal
+
+set title "Shear Velocity U_{τ}" font "Times Bold,50"
+
+#################
+#Stats
+#################
+stats "postProcessing/FACUtility/2600/FAC_downstream.dat" every ::0::502 using 4 nooutput name 'U'
+
+set ytics add ('' (U_mean))
+set label 1 at 22.2,(U_mean+U_mean*1.2) sprintf('%.4f', U_mean)
+set arrow from 20,(U_mean) rto 2,(U_mean*1.2)
+
+set term pngcairo enhanced linewidth 2
+
+plot "postProcessing/FACUtility/2600/FAC_downstream.dat" every ::0::502 using (($1-0.253)*1000):4 title 'U_{τ}' w l ls 1, \
+     "postProcessing/FACUtility/2600/FAC_downstream.dat" every ::0::502 using (($1-0.253)*1000):(U_mean) title 'U_{τ mean}' w l ls 2

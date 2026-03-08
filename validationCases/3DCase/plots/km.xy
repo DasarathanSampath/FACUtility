@@ -1,0 +1,33 @@
+#!/usr/bin/gnuplot    
+reset
+
+set term pngcairo dashed font "Times,40" size 1920,1080
+
+set style line 1 lt 1 lw 4 linecolor rgb "#000000"
+set style line 2 lt 1 lw 4 linecolor rgb "#00008B"
+
+set output 'km.png'
+
+set grid
+set xlabel "Distance (mm)" font "Times Bold,40"
+
+set ylabel "k_{m} (m/s)" font "Times Bold,40"
+
+set key outside center top horizontal
+
+set title "Mass transfer coefficient (k_{m})" font "Times Bold,50"
+
+#################
+#Stats
+#################
+stats "postProcessing/FACUtility/4000/FAC_downstream.dat" every ::0::1473 using 5 nooutput name 'Km'
+
+set ytics add ('' (Km_mean))
+set rmargin 9
+set label 1 at 22.2,(Km_mean+Km_mean*1.2) sprintf('%.4f', Km_mean)
+set arrow from 20,(Km_mean) rto 2,(Km_mean*1.2)
+
+set term pngcairo enhanced linewidth 2
+
+plot "postProcessing/FACUtility/4000/FAC_downstream.dat" every ::0::1473 using (($1-0.253)*1000):5 title 'k_{m}' w l ls 1, \
+     "postProcessing/FACUtility/4000/FAC_downstream.dat" every ::0::1473 using (($1-0.253)*1000):(Km_mean) title 'K_{m Mean}' w l ls 2

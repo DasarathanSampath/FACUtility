@@ -14,41 +14,12 @@ FoamFile
     object      decomposeParDict;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-/*// 6 core //
-numberOfSubdomains  24;
+numberOfSubdomains  8;
 
 method          hierarchical;
 coeffs
 {
-    n   (6 2 2);
-}*/
-
-// 8 core //
-numberOfSubdomains  4;
-
-method          hierarchical;
-coeffs
-{
-    n   (4 1 1);
+    n   (8 1 1);
 }
 
-// constraints
-// {
-//     preservePatches
-//     {
-//         type            preservePatches;
-//         patches         (upsInlet_master upsInlet_slave);
-//     }
-// }
-
-/*// 4 core //
-numberOfSubdomains  4;
-
-method          hierarchical;
-coeffs
-{
-    n   (4 1 1);
-}
-
-*/
 // ************************************************************************* //

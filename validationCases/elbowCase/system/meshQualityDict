@@ -1,0 +1,51 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2112                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      meshQualityDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+#includeEtc "caseDicts/mesh/generation/meshQualityDict.cfg"
+
+//Use these setting when you have trouble achiving the layers
+
+maxNonOrtho 180;
+maxBoundarySkewness -1;	
+maxInternalSkewness -1;
+
+
+//Use these settings for better control
+/* maxNonOrtho 75;
+maxBoundarySkewness 20;	//Original 20 for better quality 4
+maxInternalSkewness 4; */
+
+//Other best general settings
+maxConcave 80;
+
+minVol 1e-13;
+
+minTetQuality -1e+30;
+
+minArea -1;
+
+minTwist 0.02;
+
+minDeterminant 0.001;
+
+minFaceWeight 0.05;
+
+minVolRatio 0.01;
+
+minTriangleTwist -1;
+
+
+// ************************************************************************* //
