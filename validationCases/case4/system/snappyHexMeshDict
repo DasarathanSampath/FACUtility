@@ -1,0 +1,122 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2112                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      snappyHexMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+castellatedMesh true;
+snap            true;
+addLayers       true;
+geometry
+{
+    inlet.stl       {type triSurfaceMesh; name inlet;}
+    outlet.stl       {type triSurfaceMesh; name outlet;}
+    walls_elbow.stl       {type triSurfaceMesh; name walls_elbow;}
+    //walls.stl       {type triSurfaceMesh; name walls;}
+    //elbow.stl       {type triSurfaceMesh; name elbow;}
+}
+castellatedMeshControls
+{
+    maxLocalCells 20000000;
+    maxGlobalCells 20000000;
+    minRefinementCells 0;
+    maxLoadUnbalance 0.10;
+    nCellsBetweenLevels 2;
+    resolveFeatureAngle 30;
+    allowFreeStandingZoneFaces true;
+    features
+    (
+        {file "inlet.eMesh";       level 0;}
+        {file "outlet.eMesh";       level 0;}
+        {file "walls_elbow.eMesh";       level 0;}
+        //{file "walls.eMesh";       level 0;}
+        //{file "elbow.eMesh";       level 0;}
+    );
+    refinementSurfaces
+    {
+        inlet {level (1 1); patchInfo{type patch;}}
+        outlet {level (1 1); patchInfo{type patch;}}
+        walls_elbow {level (2 2); patchInfo{type wall;}}
+        //walls {level (2 2); patchInfo{type wall;}}
+        //elbow {level (2 2); patchInfo{type wall;}}
+    }
+    refinementRegions
+    {}
+    locationInMesh (0.12 -0.1 0); 
+}
+snapControls
+{
+    nSmoothPatch 3;
+    tolerance 2.0;
+    nSolveIter 30;
+    nRelaxIter 5;
+    nFeatureSnapIter 10;
+    implicitFeatureSnap true;
+    explicitFeatureSnap false;
+    multiRegionFeatureSnap true;
+    detectNearSurfacesSnap true;
+}
+addLayersControls
+{
+    relativeSizes true;
+    layers
+    {
+        walls_elbow
+        {
+            nSurfaceLayers 5;
+        }
+        // walls
+        // {
+        //     nSurfaceLayers 5;
+        // }
+        // elbow
+        // {
+        //     nSurfaceLayers 5;
+        // }
+    }
+    relativeSizes       true;
+    expansionRatio      1.2;
+    finalLayerThickness 0.15;
+    minThickness        1e-3;
+    nGrow 0;
+    featureAngle 330;
+    maxFaceThicknessRatio 0.5;
+    nSmoothSurfaceNormals 1;
+    nSmoothThickness 10;
+    minMedianAxisAngle 90;
+    maxThicknessToMedialRatio 0.3;
+    nSmoothNormals 3;
+    slipFeatureAngle 30;
+    nRelaxIter 5;
+    nBufferCellsNoExtrude 0;
+    nLayerIter 50;
+    nRelaxedIter 20;
+    minMedialAxisAngle 90;
+}
+meshQualityControls
+{
+    #include "meshQualityDict"
+    nSmoothScale 4;
+    errorReduction 0.75;
+    relaxed
+    {
+        maxNonOrtho 75;
+    }
+}
+writeFlags
+(
+    scalarLevels
+    layerSets
+    layerFields
+);
+mergeTolerance 1e-6;
+// ************************************************************************* //

@@ -40,7 +40,8 @@ inline void writeFACDat
     const surfaceScalarField& kmFace,
     const surfaceScalarField& CeqFace,
     const surfaceScalarField& TLFace,
-    const volScalarField T,
+    const volScalarField& T,
+    const volScalarField& yPlus,
     const bool skipInternal = true
 )
 {
@@ -63,7 +64,7 @@ inline void writeFACDat
     // Header
     os  << "# FACUtility face data\n";
     os  << "# time = " << runTime.timeName() << "\n";
-    os  << "# columns: x y z UTau km Ceq TL T\n";
+    os  << "# columns: x y z UTau km Ceq TL T yPlus\n";
 
     const labelList& faces = sel.globalFaces();
     const polyBoundaryMesh& pbm = mesh.boundaryMesh();
@@ -90,9 +91,11 @@ inline void writeFACDat
         const scalar ceq = CeqFace.boundaryField()[pId][lf];
         const scalar tl  = TLFace.boundaryField()[pId][lf];
         const scalar temperature  = T.boundaryField()[pId][lf];
+        const scalar yPlusValue = yPlus.boundaryField()[pId][lf];
 
         os  << c.x() << ' ' << c.y() << ' ' << c.z() << ' '
-            << ut    << ' ' << km    << ' ' << ceq   << ' ' << tl << ' ' << temperature
+            << ut    << ' ' << km    << ' ' << ceq   << ' ' << tl << ' ' 
+            << temperature << ' ' << yPlusValue
             << '\n';
     }
 }

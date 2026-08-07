@@ -187,7 +187,7 @@ void FACChemistryModel::compute
         }
 
         //Find ferrous iron solubility Ceq in mol/kg
-        const scalar Ceq = k0*sqr(mH)/a + (k1*mH)/a + k2/a + (k3/mH)/a;
+        const scalar Ceq = k0*sqr(mH)*a + (k1*mH)*a + k2*a + (k3/mH)*a;
 
         //k0.correctBoundaryConditions();
         CeqFace.boundaryFieldRef()[pId][lf] = Ceq;

@@ -1,0 +1,59 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  4.1                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      decomposeParDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+numberOfSubdomains  8;
+
+method              scotch;
+
+/*// 6 core //
+numberOfSubdomains  24;
+
+method          hierarchical;
+coeffs
+{
+    n   (6 2 2);
+}*/
+
+// 8 core //
+/* numberOfSubdomains  4;
+
+method          hierarchical;
+coeffs
+{
+    n   (4 1 1);
+} */
+
+// constraints
+// {
+//     preservePatches
+//     {
+//         type            preservePatches;
+//         patches         (upsInlet_master upsInlet_slave);
+//     }
+// }
+
+/*// 4 core //
+numberOfSubdomains  4;
+
+method          hierarchical;
+coeffs
+{
+    n   (4 1 1);
+}
+
+*/
+// ************************************************************************* //

@@ -19,7 +19,7 @@ FACChemistryTable::FACChemistryTable(const fileName& chemistryDictFile)
 :
     R_(1.987),
     Molor_mass_iron_(55.845),
-    Density_iron_(7.874),
+    Density_iron_(7874),
     sp_(),
     Kw_(nullptr)
 {
@@ -27,7 +27,7 @@ FACChemistryTable::FACChemistryTable(const fileName& chemistryDictFile)
 
     R_ = d.getOrDefault<scalar>("R_cal_per_molK", 1.987);
     Molor_mass_iron_ = d.getOrDefault<scalar>("Molor_mass_iron", 55.845);
-    Density_iron_ = d.getOrDefault<scalar>("Density_iron", 7.874);
+    Density_iron_ = d.getOrDefault<scalar>("Density_iron", 7874);
 
     dictionary sc = d.subDict("speciesConstants");
 

@@ -246,3 +246,31 @@ Note: The plots are visualized and generated using ParaView
 
 This case reproduces the elbow-pipe validation configuration and is useful for studying circumferential variation in thinning around the bend.
 
+### 6.4 Case 4 (Utanohara and Murase)
+
+```bash
+# move to the case director
+cd cases/case4
+# copy the original zero folder as "0"
+cp -r 0.orig/ 0 
+# create back ground mesh
+blockMesh 
+# generate *.eMsh for edges
+surfaceFeatureExtract
+# create mesh
+snappyHexMesh -overwrite
+# run solver
+buoyantSimpleFoam # run solver in single core
+
+# Run in parallel
+decomposePar # split mesh, adjust the number of cores in "decomposeParDict"
+mpirun -np 4 buoyantSimpleFoam -parallel # run solver in parallel 
+mpirun -np 4 buoyantSimpleFoam -parallel > log.solver # to log the solver in a file
+
+mv $(foamListTimes -latestTime)/turbulence*muEff $(foamListTimes -latestTime)/muEff # remove the prefix text from muEff under the latest time directory
+
+FACUtility -latestTime # run FACUtility
+
+Note: The plots are visualized and generated using ParaView
+```
+

@@ -20,7 +20,7 @@ class ChemistryConstants
 public:
     scalar Rcal{1.987};
     scalar MFe{55.845};
-    scalar rhoFe{7.874};
+    scalar rhoFe{7874};
 
     List<SpeciesConst> species;
 

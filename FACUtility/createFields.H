@@ -238,3 +238,29 @@ volScalarField TLPatch
     mesh,
     dimensionedScalar("zero", dimVelocity, 0.0)
 );
+
+Info<< "Reading yPlus field\n" << endl;
+
+IOobject yPlusHeader
+(
+    "yPlus",
+    runTime.timeName(),
+    mesh,
+    IOobject::MUST_READ,
+    IOobject::NO_WRITE
+);
+
+if (!yPlusHeader.typeHeaderOk<volScalarField>(true))
+{
+    FatalErrorInFunction
+        << "Cannot find a valid yPlus field at time "
+        << runTime.timeName() << nl
+        << "Run the yPlus function object before running FACUtility."
+        << exit(FatalError);
+}
+
+volScalarField yPlus
+(
+    yPlusHeader,
+    mesh
+);

@@ -58,5 +58,6 @@ writeFACDat
     CeqFace,
     TLFace,
     T,
+    yPlus,
     facProps.skipInternalFaces
 );

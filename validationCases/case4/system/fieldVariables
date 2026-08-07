@@ -1,0 +1,60 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v1812                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      volFlux;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+    //y++
+    yplus_field
+    {
+        type yPlus;
+        libs ("libfieldFunctionObjects.so");
+
+        enabled true;
+        //log false;
+
+        writeControl writeTime;
+    }
+
+    //----------------------------------
+    //Volume flux    
+    //----------------------------------
+    inletVolFlux
+    {
+        type            surfaceFieldValue;
+        libs            ("libfieldFunctionObjects.so");
+        writeControl    writeTime;
+        writeInterval   1;
+        writeFields     false;
+        log             false;
+        regionType      patch;
+        name            inlet;
+        fields          (phi);
+        operation       sum;
+    }
+
+    outletVolFlux
+    {
+        type            surfaceFieldValue;
+        libs            ("libfieldFunctionObjects.so");
+        writeControl    writeTime;
+        writeInterval   1;
+        writeFields     false;
+        log             false;
+        regionType      patch;
+        name            outlet;
+        fields          (phi);
+        operation       sum;
+    }
+
+// ************************************************************************* //

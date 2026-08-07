@@ -10,7 +10,7 @@ ChemistryConstants::ChemistryConstants()
 :
     Rcal(1.987),
     MFe(55.845),
-    rhoFe(7.874),
+    rhoFe(7874),
     species()
 {}
 
