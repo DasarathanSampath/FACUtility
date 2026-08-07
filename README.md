@@ -216,11 +216,11 @@ gnuplot plots/*.xy # run gnuplots to check the results
 
 This case extends the benchmark workflow to a three-dimensional geometry.
 
-### 6.3 3D Elbow Pipe Case
+### 6.3 DN150 Case
 
 ```bash
 # move to the case director
-cd cases/elbowCase 
+cd cases/DN150 
 # copy the original zero folder as "0"
 cp -r 0.orig/ 0 
 # create back ground mesh
