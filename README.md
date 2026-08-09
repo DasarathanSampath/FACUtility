@@ -9,8 +9,8 @@ This repository is written for **OpenFOAM V2212** and contains:
 - four validation / example cases
   - **2D benchmark case** (validationCases/2DCase)
   - **3D benchmark case** (validationCases/3DCase)
-  - **3D elbow pipe case** (validationCases/DN150)
-  - **3D elbow pipe case (Utanohara et al.)** (case4)
+  - **3D elbow pipe case (plant-representative)** (validationCases/DN150)
+  - **Utanohara & Murase compound elbow** (validationCases/case4)
 
 The default case settings are configured to reproduce the validation conditions reported in the associated publication.
 
@@ -25,7 +25,6 @@ A typical repository layout is shown below. Adjust the paths if your local folde
 │   ├── FACUtility.C
 │   ├── Make
 │   │   ├── files
-│   │   ├── linux64GccDPInt32Opt
 │   │   └── options
 │   ├── createFields.H
 │   ├── models
@@ -52,7 +51,7 @@ A typical repository layout is shown below. Adjust the paths if your local folde
 │   │   └── FACSelection.H
 │   └── writeOutputs.H
 ├── LICENSE
-├── readme.md
+├── README.md
 └── validationCases
     ├── 2DCase
     │   ├── 0.orig
@@ -172,7 +171,7 @@ The utility reads the converged OpenFOAM case and computes FAC-related quantitie
 
 ---
 
-## 6. Running the Three Validation Cases
+## 6. Running the Four Validation Cases
 
 ### 6.1 2D Benchmark Case
 
@@ -222,11 +221,11 @@ gnuplot plots/*.xy # run gnuplots to check the results
 
 This case extends the benchmark workflow to a three-dimensional geometry.
 
-### 6.3 DN150/Case4
+### 6.3 DN150
 
 ```bash
 # move to the case director
-cd validationCases/DN150 (or) cd validationCases/case4
+cd validationCases/DN150
 # copy the original zero folder as "0"
 cp -r 0.orig/ 0 
 # create back ground mesh
@@ -256,7 +255,7 @@ This case reproduces the elbow-pipe validation configuration and is useful for s
 
 ```bash
 # move to the case director
-cd cases/case4
+cd validationCases/case4
 # copy the original zero folder as "0"
 cp -r 0.orig/ 0 
 # create back ground mesh
