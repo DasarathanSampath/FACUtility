@@ -1,4 +1,4 @@
-# FACUtility
+# FACUtility [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 
 FACUtility is an OpenFOAM-based post-processing utility for predicting flow-accelerated corrosion (FAC) wall-thinning rates from a converged CFD solution. The utility combines hydrodynamic quantities derived from the wall region with temperature-dependent chemistry to compute local thinning-related outputs on selected wall patches.
 
@@ -136,7 +136,13 @@ ls $FOAM_USER_APPBIN/FACUtility
 
 ---
 
-## 4. General Workflow
+## 4. License
+
+FACUtility is released under the [GNU General Public License v3.0 (GPL-3.0)](LICENSE).
+
+FACUtility directly includes OpenFOAM headers and links against OpenFOAM's core libraries (`fvMesh`, `volScalarField`, `surfaceScalarField`, `fvc::` operators, etc.). Since OpenFOAM itself is licensed under GPL-3.0, FACUtility is a combined/derivative work under the GPL and inherits the same license. See the [`LICENSE`](LICENSE) file for the full text.
+
+## 5. General Workflow
 
 FACUtility is a **decoupled post-processing utility**. 
 
@@ -156,7 +162,7 @@ Create mesh -> Run CFD solver -> Run FACUtility -> Post-process outputs
 
 ---
 
-## 5. Input Requirements
+## 6. Input Requirements
 
 Before running FACUtility, the CFD case must already contain the required solution fields. Depending on the selected physical model and case setup, these typically include:
 
@@ -171,9 +177,9 @@ The utility reads the converged OpenFOAM case and computes FAC-related quantitie
 
 ---
 
-## 6. Running the Four Validation Cases
+## 7. Running the Four Validation Cases
 
-### 6.1 2D Benchmark Case
+### 7.1 2D Benchmark Case
 
 ```bash
 # move to the case director
@@ -197,7 +203,7 @@ gnuplot plots/*.xy # run gnuplots to check the results
 
 This case reproduces the 2D validation setup and is intended to demonstrate the local flow acceleration, separation behavior, and resulting FAC-related post-processing.
 
-### 6.2 3D Benchmark Case
+### 7.2 3D Benchmark Case
 
 ```bash
 # move to the case director
@@ -221,7 +227,7 @@ gnuplot plots/*.xy # run gnuplots to check the results
 
 This case extends the benchmark workflow to a three-dimensional geometry.
 
-### 6.3 DN150
+### 7.3 DN150
 
 ```bash
 # move to the case director
@@ -251,7 +257,7 @@ Note: The plots are visualized and generated using ParaView
 
 This case reproduces the elbow-pipe validation configuration and is useful for studying circumferential variation in thinning around the bend.
 
-### 6.4 Case 4 (Utanohara and Murase)
+### 7.4 Case 4 (Utanohara and Murase)
 
 ```bash
 # move to the case director
