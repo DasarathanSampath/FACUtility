@@ -28,7 +28,7 @@ Dconstant       2.2e-8;   // [m2/s]
 DtableFile      "constant/D_vs_T.dat"; // optional
 
 // ---- Chemistry model data ----
-mA                  -1.591e-6;   // [mol/kg] molality of KOH etc.
+mA                  -1.494e-7;   // [mol/kg] molality of KOH etc.
 chemistryTableFile  "constant/chemistryConstants.dat";
 KwTableFile         "constant/Kw_vs_T.dat";
 pH2TableFile        "constant/pH2_vs_T.dat";
@@ -36,7 +36,7 @@ pH2TableFile        "constant/pH2_vs_T.dat";
 newton
 {
     maxIter     60;
-    absTol      1e-12;
+    absTol      1e-24;
     relTol      1e-10;
     minStep     1e-18;
     maxDampIter 12;
@@ -45,7 +45,7 @@ newton
 }    
 
 // ---- Thinning model data ----
-chromiumFactor      0.12;     // (1 - beta)
+chromiumFactor      0.112;     // (1 - beta)
 corrosionHours      8760;      // Hours of corrosion to be estimated
 
 // ---- Output controls ----

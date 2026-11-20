@@ -66,7 +66,6 @@ A typical repository layout is shown below. Adjust the paths if your local folde
     ├── case4
     │   ├── 0.orig
     │   ├── constant
-    │   ├── plots
     │   └── system
     └── DN150
         ├── 0.orig

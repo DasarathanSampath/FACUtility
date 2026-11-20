@@ -40,3 +40,5 @@
 
 # debug information files
 *.dwo
+
+FACUtility/Make/linux64*

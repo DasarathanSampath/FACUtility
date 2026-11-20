@@ -10,7 +10,7 @@ namespace Foam
 struct NewtonControls
 {
     label maxIter {50};
-    scalar absTol {1e-12};     // absolute residual tolerance
+    scalar absTol {1e-24};     // absolute residual tolerance
     scalar relTol {1e-10};     // relative step tolerance
     scalar minStep {1e-18};    // avoid stalling
     scalar maxDampIter {12};   // backtracking attempts
@@ -47,8 +47,13 @@ inline bool newtonSolve
         scalar dx = -Fx/dFx;
 
         // Step-based convergence check
-        if (mag(dx) <= max(ctrl.relTol*max(mag(x), scalar(1.0)), ctrl.minStep))
+        // if (mag(dx) <= max(ctrl.relTol*max(mag(x), scalar(1.0)), ctrl.minStep))
+        // {
+        //     return true;
+        // }
+        if (mag(dx) <= max(ctrl.relTol*mag(x), ctrl.minStep))
         {
+            x = min(max(x + dx, ctrl.xMin), ctrl.xMax);
             return true;
         }
 

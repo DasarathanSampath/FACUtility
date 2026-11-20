@@ -1,0 +1,63 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2212                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      FACProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// ---- Erossion model data ----
+UName                   U;
+TName                   T;
+pName                   p;
+muEffName               muEff;   // if exists
+rhoName                 rho;     // if exists, else uses thermo.rho()
+useThermoForRho         true; //Use thermo models to compute rho (optional & default is true)
+charLength      0.005;     // [m] diameter or hydraulic length d
+UmeanConstant   4.5;       // [m/s] used only if Umode=userConstant
+diffusivityMode constant;  // constant | table
+Dconstant       3.21e-8;   // [m2/s]
+DtableFile      "constant/D_vs_T.dat"; // optional
+
+// ---- Chemistry model data ----
+mA                  -7.94e-6;   // [mol/kg] molality of KOH etc.
+chemistryTableFile  "constant/chemistryConstants.dat";
+KwTableFile         "constant/Kw_vs_T.dat";
+pH2TableFile        "constant/pH2_vs_T.dat";
+// Newton-Raphson controls
+newton
+{
+    maxIter     60;
+    absTol      1e-24;
+    relTol      1e-10;
+    minStep     1e-18;
+    maxDampIter 12;
+    xMin        1e-20;
+    xMax        20;
+}    
+
+// ---- Thinning model data ----
+chromiumFactor      0.947;     // (1 - beta)
+corrosionHours      10000;      // Hours of corrosion to be estimated
+
+// ---- Output controls ----
+writeCSV        true;
+csvFile         "postProcessing/FACUtility/FACsummary.csv";
+// ---- Other defaults ----
+writeVolMapping     true; //Volume mapping (optional & default is true)
+skipInternalFaces   true; //To skipe internal faces (optional & default is true
+
+// ---- Region selection: patch or cellZone ----
+selectionMode patch;      // patch | cellZone
+patchName     downstream; // for patch mode
+faceZoneName  FACfaces;       // for cellZone mode (optional)
+
+// ************************************************************************* //

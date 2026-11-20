@@ -1,0 +1,15 @@
+# Utanohara and Murase (2019), doi:10.1016/j.nucengdes.2018.11.022, Run 3.
+# Measured FAC rate, mm/10,000 h (figure-extracted). x/D: along the centreline from the elbow entrance (Fig. 7).
+# Used for calibration: the eight straight-pipe sensors. Held out: the three elbow sensors (x/D = 1.75).
+station,x_over_D,side,FAC_rate_mm_per_10000h,use
+upstream,-9.35,extrados,0.134,calibration
+upstream,-9.35,intrados,0.110,calibration
+elbow,1.75,extrados,0.353,held out
+elbow,1.75,intrados,0.271,held out
+elbow,1.75,upper,0.298,held out
+downstream_near,6.2,intrados,0.165,calibration
+downstream_near,6.2,upper,0.170,calibration
+downstream_near,6.2,lower,0.200,calibration
+downstream_far,7.2,extrados,0.172,calibration
+downstream_far,7.2,intrados,0.100,calibration
+downstream_far,7.2,upper,0.207,calibration

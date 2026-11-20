@@ -1,0 +1,8 @@
+# Yoneda et al. (2016), doi:10.1299/mej.15-00232. Test run #07, specimen TS-1.
+# 150 C, pH25 8.9, 4.5 m/s, 3 mm contraction. Thinning along the specimen centre line.
+# Window: 5-20 mm downstream of the contraction. Units: mm/10,000 h.
+# average: digitized from Fig. 13(a); min and max: from Fig. 8(c).
+statistic,value_mm_per_10000h,source
+average,0.62,Fig. 13(a)
+minimum,0.50,Fig. 8(c)
+maximum,0.63,Fig. 8(c)
