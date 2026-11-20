@@ -36,7 +36,7 @@ pH2TableFile        "constant/pH2_vs_T.dat";
 newton
 {
     maxIter     60;
-    absTol      1e-12;
+    absTol      1e-24;
     relTol      1e-10;
     minStep     1e-18;
     maxDampIter 12;

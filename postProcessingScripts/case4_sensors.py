@@ -15,10 +15,10 @@ Usage
   python3 case4_sensors.py walls.csv --factor 0.112
   (--factor = the chromium factor of the run the CSV comes from)
 
-Geometry (defaults measured from the CFD wall slice, rms 0.12 mm):
+Geometry (defaults from the CAD model, same as the test section):
   elbow entrance at x0 = 0.0064 m on the upstream centreline y = yc = 0.1223 m,
-  two 45 deg bends of centreline radius R = 0.0799 m joined by a straight
-  section L = 0.0510 m, D = 0.0495 m; flow turns from +x to -y in the z = 0
+  two 45 deg bends of centreline radius R = 0.0762 m joined by a straight
+  section L = 0.054 m, D = 0.0495 m; flow turns from +x to -y in the z = 0
   plane. Positions are located by centreline distance s from the entrance:
       upstream     s = -9.35 D
       elbow        mid-length of the straight section between the bends
@@ -79,8 +79,8 @@ def main():
     ap.add_argument("--x0", type=float, default=0.0064)
     ap.add_argument("--yc", type=float, default=0.1223)
     ap.add_argument("--zc", type=float, default=0.0)
-    ap.add_argument("--R", type=float, default=0.0799)
-    ap.add_argument("--L", type=float, default=0.0510)
+    ap.add_argument("--R", type=float, default=0.0762)
+    ap.add_argument("--L", type=float, default=0.054)
     ap.add_argument("--axial", type=float, default=0.020, help="footprint length [m]")
     ap.add_argument("--width", type=float, default=0.003, help="footprint width [m]")
     ap.add_argument("--yplus-max", type=float, default=70.0)
