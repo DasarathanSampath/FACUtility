@@ -641,7 +641,7 @@ def save_individual_plot(
     axis.set_xticks(np.arange(0.0, 361.0, 45.0))
     axis.set_xlabel("Circumferential angle (°)")
     axis.set_ylabel(
-        "Normalized T_\{L\}, T_\{L\}/overall maximum"
+        r"Normalized $T_L$ ($T_L$ / overall maximum)"
     )
     axis.set_ylim(0.0, 1.05)
     axis.set_title(f"{VALUE_COLUMN} around circumference — {slice_name}")

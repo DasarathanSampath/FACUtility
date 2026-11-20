@@ -45,7 +45,7 @@ newton
 }    
 
 // ---- Thinning model data ----
-chromiumFactor      0.134;     // (1 - beta)
+chromiumFactor      0.112;     // (1 - beta)
 corrosionHours      8760;      // Hours of corrosion to be estimated
 
 // ---- Output controls ----
