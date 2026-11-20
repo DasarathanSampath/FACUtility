@@ -28,8 +28,8 @@ Geometry (defaults from the CAD model, same as the test section):
   +x downstream), intrados = opposite, upper = +z, lower = -z.
 
 Footprint: 20 mm along the centreline x 3 mm around the circumference, as the
-sensor plates (Fig. 3 of the paper). Area-weighted mean of TLPatch. Faces
-with yPlus > 70 are reported separately (Comment 7): each average is given
+sensor plates of Utanohara and Murase (2019). Area-weighted mean of TLPatch. Faces
+with yPlus > 70 are reported separately: each average is given
 with and without them.
 """
 

@@ -46,11 +46,7 @@ inline bool newtonSolve
         // Newton step
         scalar dx = -Fx/dFx;
 
-        // Step-based convergence check
-        // if (mag(dx) <= max(ctrl.relTol*max(mag(x), scalar(1.0)), ctrl.minStep))
-        // {
-        //     return true;
-        // }
+        // Step-based convergence check (relative to x); the final step is applied
         if (mag(dx) <= max(ctrl.relTol*mag(x), ctrl.minStep))
         {
             x = min(max(x + dx, ctrl.xMin), ctrl.xMax);

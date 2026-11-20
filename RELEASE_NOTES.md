@@ -1,4 +1,4 @@
-# FACUtility vX.Y.Z
+# FACUtility v1.1.0
 
 This release was used to generate all results in the revised paper "FAC-Utility: An Open-Source Framework for Predicting Wall-Thinning Rates in Flow-Accelerated Corrosion".
 

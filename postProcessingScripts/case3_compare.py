@@ -9,7 +9,7 @@ Inputs (from process_elbow_slices_4.py, folder processed_slices/):
   *_with_angles.csv                all wall points per slice (for the
                                    predicted ring maximum)
 
-Normalisation (reviewer Comment 6): the predicted values are divided by the
+Normalisation: the predicted values are divided by the
 maximum of the same 40 sampled points, matching the measured values, which
 Yoneda et al. normalise by the maximum of their 40 measured points. The
 largest predicted entry is therefore exactly 1. The maximum over all wall

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Cases 1-2: thinning (TL) and y+ statistics over the 5-20 mm comparison window
-for each mesh / inflation setting (reviewer Comments 3 and 4).
+for each mesh or inflation setting (Tables 4-7 of the paper).
 
 One CSV per mesh, exported from ParaView from the wall patch used for the
 comparison (e.g. 'downstream'):
