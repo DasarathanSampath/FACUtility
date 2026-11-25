@@ -5,6 +5,8 @@ No change to the FACUtility code or the validation cases. All results are the sa
 - Added the owner and boundary files of the FACUtility patch for Cases 1-4
   (comparisonData/simulated/nFail_verification). With these files,
   verify_cases.py checks each face at the temperature of its owner cell (Table 3).
+- Added two Case 1 runs with p(H2) fixed at 1e-3 and 1e-6 atm (a = 0.1 and 0.01)
+  in nFail_verification/case1_a0.1 and case1_a0.01 (Table 3).
 - Added verification/extract_patch_owner.py, which makes these files from the mesh.
 - Added postProcessingScripts/case2_profile_plot.py, which makes Figure 9
   (Case 2: face values, spanwise mean and centre-line mean). README Step 5.

@@ -1,0 +1,4 @@
+# pH2_vs_T.dat
+# T[K]    pH2[bar or atm - consistent with your formulation]
+273.15  1e-3
+673.15  1e-3

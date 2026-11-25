@@ -279,7 +279,8 @@ python3 verification/verify_chemistry.py --out results/reference_values.csv
 python3 verification/verify_chemistry.py --compare verification/selftest_correct.csv
 python3 verification/verify_chemistry.py --compare verification/selftest_k2div.csv
 
-# check of CeqFace from the four validation runs, and failed solves (Table 3)
+# check of CeqFace from the four validation runs and the two Case 1 runs with
+# a = 0.1 and 0.01, and failed solves (Table 3)
 python3 verification/verify_cases.py --root comparisonData/simulated/nFail_verification
 ```
 
@@ -331,7 +332,7 @@ python3 postProcessingScripts/case4_sensors.py \
 
 | Step | What to check | Expected value |
 | --- | --- | --- |
-| 2 | `verify_cases.py` summary | case1 PASS, case2 PASS, case3 PASS, case4 PASS; max face difference < 5e-6; 0 fallback faces |
+| 2 | `verify_cases.py` summary | case1, case1_a0.01, case1_a0.1, case2, case3, case4: all PASS; max face difference < 5e-6; 0 fallback faces |
 | 3 | Mesh F, mean TL over 5-20 mm | 0.7910 mm/10,000 h |
 | 4 | Window-mean TL, gradient -> traction | 0.7910 -> 0.7911 (+0.005 %) |
 | 5 | Inflation 0.5, centre-line mean TL | 0.643 mm/10,000 h |

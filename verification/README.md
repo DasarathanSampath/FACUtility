@@ -89,6 +89,12 @@ Newton-Raphson fallback value.
 
 Run `python3 verify_cases.py` from that folder.
 
+The folders `case1_a0.1` and `case1_a0.01` hold two runs of Case 1 with p(H2)
+fixed at 1e-3 and 1e-6 atm (a = 0.1 and 0.01). Each has its own `pH2_vs_T.dat`
+(a two-row table with the fixed value), which `verify_cases.py` reads instead of
+Listing 4. They use the same mesh as Case 1, so `owner` and `boundary` are copies
+of the Case 1 files.
+
 FACUtility evaluates each face at its owner-cell temperature T[own] (Listing 8,
 line 22), so the wall patch type in T does not matter. With owner and boundary, the
 check is exact, face by face, and the output gives the largest relative difference
