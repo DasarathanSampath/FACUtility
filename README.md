@@ -260,7 +260,7 @@ These steps re-create the verification test and the validation tables of the pap
 ### Step 1: Install Python packages
 
 ```bash
-pip install numpy pandas mpmath
+pip install numpy pandas mpmath matplotlib
 ```
 
 Python 3.8 or newer is required. Run all commands below from the repository root folder.
@@ -301,12 +301,15 @@ python3 postProcessingScripts/case1_traction_vs_gradient.py \
     --out results/case1_meshF_TL_paired_window.csv
 ```
 
-### Step 5: Case 2 (Tables 4 and 7)
+### Step 5: Case 2 (Tables 4 and 7, Figure 9)
 
 ```bash
 python3 postProcessingScripts/mesh_window_stats.py \
     comparisonData/simulated/case2_inflation05.csv comparisonData/simulated/case2_inflation08.csv \
     --span-coord Points:2 --origin 0.253 --out results/case2_mesh_window_stats.csv
+
+python3 postProcessingScripts/case2_profile_plot.py \
+    comparisonData/simulated/case2_inflation05.csv --origin 0.253 --out results/case2_TL_profile.png
 ```
 
 ### Step 6: Case 3 (Tables 8, 9 and 10)
@@ -341,7 +344,7 @@ python3 postProcessingScripts/case4_sensors.py \
 
 **Step 2.** `verify_chemistry.py` solves the chemistry model directly from Eqs. (6)-(9) of the paper. It does not use any FACUtility code. The hydrogen-ion balance is solved with 50-digit precision by two methods, and the two must agree. Six of the 21 conditions use p(H2) = 10⁻³ and 10⁻⁶ atm (a = 0.1 and 0.01). At these conditions, multiplying and dividing the Fe(OH)2 term by `a` give very different results, so the test can tell them apart. `selftest_k2div.csv` holds values made with the wrong form (`k2/a`). It must fail, which shows that the test can detect this error. `verify_cases.py` checks every face of `CeqFace` against the independent solution at the temperature of its owner cell. It also counts faces with the fallback value of a failed solve. More details are in `verification/README.md`.
 
-**Steps 3 and 5.** The comparison window is 5-20 mm downstream of the upstream edge of the specimen, which is at x = 0.253 m in Cases 1 and 2 (`--origin`). For each mesh, the script gives the mean, minimum and maximum TL in the window, the y+ distribution, and the share of faces with 30 ≤ y+ ≤ 50. For Case 2, `--span-coord` gives the mean over a 2 mm wide strip along the centre line, which is where the experiment measured.
+**Steps 3 and 5.** The comparison window is 5-20 mm downstream of the upstream edge of the specimen, which is at x = 0.253 m in Cases 1 and 2 (`--origin`). For each mesh, the script gives the mean, minimum and maximum TL in the window, the y+ distribution, and the share of faces with 30 ≤ y+ ≤ 50. For Case 2, `--span-coord` gives the mean over a 2 mm wide strip along the centre line, which is where the experiment measured. `case2_profile_plot.py` draws Figure 9 from the same file and prints the same window means (0.5373 spanwise, 0.6428 centre line).
 
 **Step 4.** The thinning rate from the traction-based shear velocity is found face by face from Eq. (15): TL_t = TL_g (Uτ,t / Uτ,g)². All means are arithmetic means over the faces, which have the same size.
 

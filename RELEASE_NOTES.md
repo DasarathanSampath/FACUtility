@@ -6,6 +6,8 @@ No change to the FACUtility code or the validation cases. All results are the sa
   (comparisonData/simulated/nFail_verification). With these files,
   verify_cases.py checks each face at the temperature of its owner cell (Table 3).
 - Added verification/extract_patch_owner.py, which makes these files from the mesh.
+- Added postProcessingScripts/case2_profile_plot.py, which makes Figure 9
+  (Case 2: face values, spanwise mean and centre-line mean). README Step 5.
 - verify_cases.py: default tolerance for six written digits set to 1e-5
   (rounding of the written Ceq and T).
 - README files: description of the verification conditions corrected
