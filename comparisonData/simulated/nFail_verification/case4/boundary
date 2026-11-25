@@ -1,0 +1,16 @@
+FoamFile
+{
+    format      ascii;
+    class       polyBoundaryMesh;
+    object      boundary;
+}
+
+1
+(
+    walls_elbow
+    {
+        type            wall;
+        nFaces          141854;
+        startFace       0;
+    }
+)

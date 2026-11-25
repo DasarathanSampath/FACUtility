@@ -7,13 +7,16 @@ Files
 - `verify_chemistry.py`  independent solver; writes reference values and compares
 - `collect_ceq.py`       reads CeqFace from FACUtility runs into a CSV
 - `reference_values.csv` reference output for 21 conditions
+- `verify_cases.py`      face-by-face check of CeqFace from the four validation runs
+- `extract_patch_owner.py` makes the small owner/boundary files used by `verify_cases.py`
 
 ## 1. Reference values
 
     python3 verify_chemistry.py
 
-Writes `reference_values.csv`: for 21 conditions (T = 25-200 °C, three alkali levels,
-and p(H2) overridden to 1e-3 and 1e-6 atm so that a = 0.1 and 0.01) it lists K0-K3,
+Writes `reference_values.csv`: for 21 conditions (five temperatures, 25-200 °C,
+including 149.2 °C for Case 4; four alkali levels: Cases 1-2, Case 3, Case 4 and no
+alkali; six of them with p(H2) set to 1e-3 and 1e-6 atm so that a = 0.1 and 0.01) it lists K0-K3,
 m(H+), pH at temperature, the four species molalities and the total Ceq. The
 hydrogen-ion balance is solved twice at 50-digit precision (cubic roots and bisection),
 and the two solutions must agree to 1e-30. `Ceq_if_k2_div_a` gives the value a code
@@ -81,15 +84,30 @@ Newton-Raphson fallback value.
       case1/CeqFace               <time>/CeqFace
       case1/T                     <time>/T  (same time directory)
       case1/FACProperties         system/FACProperties  (mA and patchName read from it)
-      case1/owner                 optional: constant/polyMesh/owner (ascii)
-      case1/boundary              optional: constant/polyMesh/boundary
+      case1/owner                 owner cells of the patch faces (see below)
+      case1/boundary              the patch entry for that owner file
 
 Run `python3 verify_cases.py` from that folder.
 
 FACUtility evaluates each face at its owner-cell temperature T[own] (Listing 8,
-line 22), so the wall patch type in T does not matter. With owner and boundary the
-check is exact, face by face. Without them, each face is checked against the range
-of Ceq spanned by the lowest and highest cell temperature in the domain; that bound
-is tight when T is nearly uniform. A failed solve clamps m(H+) to 1e-20, giving
-Ceq ~ 1e4 mol/kg, so fallback faces cannot be missed. The tolerance is set from the
-written precision (5e-6 for writePrecision 6).
+line 22), so the wall patch type in T does not matter. With owner and boundary, the
+check is exact, face by face, and the output gives the largest relative difference
+for each case (Table 3 of the paper). A failed solve clamps m(H+) to 1e-20, giving
+Ceq ~ 1e4 mol/kg, so fallback faces cannot be missed.
+
+The `owner` and `boundary` files in each case folder contain only the faces of the
+FACUtility patch. The full `constant/polyMesh/owner` file lists every face of the
+mesh (50-110 MB for these cases), so it is not included. The small files were made
+from the mesh of each case with
+
+    python3 extract_patch_owner.py <caseDir> <patchName> <outDir>
+
+The cell numbers are not changed, so the small files work with the full `T` file.
+Both ascii and binary owner files can be read.
+
+Without `owner` and `boundary`, each face is checked against the range of Ceq for
+the lowest and highest cell temperature in the domain. This is a weaker check.
+
+Tolerance. The written Ceq has six significant digits (up to 5e-6 relative), and
+the written T has a step of 0.001 K (up to about 4e-6 relative in Ceq). The default
+tolerance for six written digits is therefore 1e-5. `--tol` changes it.

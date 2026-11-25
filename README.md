@@ -328,7 +328,7 @@ python3 postProcessingScripts/case4_sensors.py \
 
 | Step | What to check | Expected value |
 | --- | --- | --- |
-| 2 | `verify_cases.py` summary | case1 PASS, case2 PASS, case3 PASS, case4 PASS; 0 fallback faces |
+| 2 | `verify_cases.py` summary | case1 PASS, case2 PASS, case3 PASS, case4 PASS; max face difference < 5e-6; 0 fallback faces |
 | 3 | Mesh F, mean TL over 5-20 mm | 0.7910 mm/10,000 h |
 | 4 | Window-mean TL, gradient -> traction | 0.7910 -> 0.7911 (+0.005 %) |
 | 5 | Inflation 0.5, centre-line mean TL | 0.643 mm/10,000 h |
@@ -339,7 +339,7 @@ python3 postProcessingScripts/case4_sensors.py \
 
 ### Notes on the steps
 
-**Step 2.** `verify_chemistry.py` solves the chemistry model directly from Eqs. (6)-(9) of the paper. It does not use any FACUtility code. The hydrogen-ion balance is solved with 50-digit precision by two methods, and the two must agree. Two of the 21 conditions use p(H2) = 10⁻³ and 10⁻⁶ atm (a = 0.1 and 0.01). At these conditions, multiplying and dividing the Fe(OH)2 term by `a` give very different results, so the test can tell them apart. `selftest_k2div.csv` holds values made with the wrong form (`k2/a`). It must fail, which shows that the test can detect this error. `verify_cases.py` checks every face of `CeqFace` against the independent solution at the cell temperature. It also counts faces with the fallback value of a failed solve. More details are in `verification/README.md`.
+**Step 2.** `verify_chemistry.py` solves the chemistry model directly from Eqs. (6)-(9) of the paper. It does not use any FACUtility code. The hydrogen-ion balance is solved with 50-digit precision by two methods, and the two must agree. Six of the 21 conditions use p(H2) = 10⁻³ and 10⁻⁶ atm (a = 0.1 and 0.01). At these conditions, multiplying and dividing the Fe(OH)2 term by `a` give very different results, so the test can tell them apart. `selftest_k2div.csv` holds values made with the wrong form (`k2/a`). It must fail, which shows that the test can detect this error. `verify_cases.py` checks every face of `CeqFace` against the independent solution at the temperature of its owner cell. It also counts faces with the fallback value of a failed solve. More details are in `verification/README.md`.
 
 **Steps 3 and 5.** The comparison window is 5-20 mm downstream of the upstream edge of the specimen, which is at x = 0.253 m in Cases 1 and 2 (`--origin`). For each mesh, the script gives the mean, minimum and maximum TL in the window, the y+ distribution, and the share of faces with 30 ≤ y+ ≤ 50. For Case 2, `--span-coord` gives the mean over a 2 mm wide strip along the centre line, which is where the experiment measured.
 

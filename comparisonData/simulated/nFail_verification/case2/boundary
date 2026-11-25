@@ -1,0 +1,16 @@
+FoamFile
+{
+    format      ascii;
+    class       polyBoundaryMesh;
+    object      boundary;
+}
+
+1
+(
+    downstream
+    {
+        type            wall;
+        nFaces          8750;
+        startFace       0;
+    }
+)

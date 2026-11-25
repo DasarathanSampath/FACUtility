@@ -11,4 +11,4 @@ Each CSV file is a ParaView export of cell data, one row per wall face, with the
 | `case2_inflation05.csv`, `case2_inflation08.csv` | Case 2, `downstream` patch, two inflation settings | Tables 4 and 7 |
 | `case3_slices/slice_A.csv` ... `slice_E.csv` | Case 3, wall values on the five measuring planes | Tables 8-10 |
 | `case4_walls_cr0.112.csv` | Case 4, elbow wall, chromium factor 0.112 | Table 11 |
-| `nFail_verification/case1` ... `case4` | `CeqFace`, `T` and `FACProperties` of each case | Table 3 |
+| `nFail_verification/case1` ... `case4` | `CeqFace`, `T`, `FACProperties`, and `owner`/`boundary` for the patch faces only, of each case | Table 3 |

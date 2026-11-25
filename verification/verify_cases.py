@@ -9,8 +9,10 @@ Folder layout (one subfolder per case; only small files are needed):
     nFail_verification/
       case1/CeqFace          required  (from the time directory FACUtility wrote)
       case1/T                required  (same time directory)
-      case1/owner            optional  (constant/polyMesh/owner, ascii)
-      case1/boundary         optional  (constant/polyMesh/boundary)
+      case1/owner            optional  (owner cells of the patch faces, made by
+                                        extract_patch_owner.py, or the full
+                                        constant/polyMesh/owner in ascii)
+      case1/boundary         optional  (matching boundary file)
       case1/FACProperties    required  (system/FACProperties: mA, patchName)
       Kw_vs_T.dat, pH2_vs_T.dat   optional, in the case folder or the root folder
                              (if absent, Listings 3 and 4 are used)
@@ -139,7 +141,9 @@ def check_case(d, patch_override, tol_user):
 
     ceq, toks = patch_values(os.path.join(d, "CeqFace"), patch)
     digits = max(sig_digits(t) for t in toks)
-    tol = tol_user or (1e-6 if digits >= 9 else 0.5 * 10 ** (1 - digits) * 1.01)
+    # rounding of the written Ceq (half a unit in the last digit) plus the rounding
+    # of the written T (0.001 K gives up to ~4e-6 in Ceq): about twice the first term
+    tol = tol_user or (1e-6 if digits >= 9 else 2 * 0.5 * 10 ** (1 - digits) * 1.01)
 
     bad = [i for i, c in enumerate(ceq) if not math.isfinite(c) or c <= 0 or c > 1e-2]
 
